@@ -2,6 +2,9 @@ const express = require('express');
 require('dotenv').config();
 const connectDB = require('./config/db');
 const cors = require('cors');
+const userRoutes = require('./routes/userRoutes');
+const transactionRoutes =  require('./routes/transactionRoutes');
+const bankAccountRoutes = require('./routes/bankAccountRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,6 +18,11 @@ app.get('/', (req, res) => {
 });
 
 connectDB();
+
+//ROUTES
+app.use('/users', userRoutes);
+app.use('/bank-accounts', bankAccountRoutes);
+app.use('/transactions', transactionRoutes);
 
 
 app.listen(PORT, () => {
